@@ -4,9 +4,12 @@ Capture video;
 
 PImage prevFrame;
 
+Zone zone;
+
 
 void setup(){
   size(640,480);
+  zone = new Zone(100,100,440,280);
   video = new Capture(this,width,height,30);
   prevFrame = createImage(video.width, video.height,RGB);
   stroke(0,0,255);
@@ -33,8 +36,10 @@ void draw(){
     }
   }
   updatePixels();
+ 
+ 
   // verticle lines 
-  for(int x = 64; x < width; x += 64){
+ /* for(int x = 64; x < width; x += 64){
   
    line(x,0,x,video.height);
   }  
@@ -42,23 +47,29 @@ void draw(){
   for(int y = 0; y < height; y += 48){
      // line();
     }
-  
-  
-  
+  */
+
+
+//Zone draws  
+
+zone.x+=3;
+if (zone.x > width){
+zone.x = -zone.width;
+}
+zone.show();  
 
 }
 
-Class Zone{
-  
-
-
-
-
-
-
-
-
-
-
-
+class Zone {  
+  int x, y,width,height; 
+  Zone (int x, int y, int w, int h) {  
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+  } 
+  void show(){
+    noFill();
+    rect(x,y,width,height); 
+  }
 }
