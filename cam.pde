@@ -50,13 +50,13 @@ void draw(){
   */
 
 
-//Zone draws  
+  //Zone draws  
 
-zone.x+=3;
-if (zone.x > width){
-zone.x = -zone.width;
-}
-zone.show();  
+  zone.x+=3;
+  if (zone.x > width){
+    zone.x = -zone.width;
+  }
+  zone.show();  
 
 }
 
