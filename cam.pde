@@ -1,3 +1,8 @@
+// import audio player
+import ddf.minim.*;
+Minim minim;
+
+
 import processing.video.*;
 
 Capture video;
@@ -9,10 +14,13 @@ Zone zone;
 
 void setup(){
   size(640,480);
+  minim = new Minim(this); //define or create what minim is before the zone is established
   zone = new Zone(100,100,440,280);
   video = new Capture(this,width,height,30);
   prevFrame = createImage(video.width, video.height,RGB);
   stroke(0,0,255);
+  
+  
 }
 
 void draw(){
@@ -62,13 +70,15 @@ void draw(){
 
 class Zone {  
   
-  
+ 
+  AudioPlayer player;
   int x, y,width,height; 
   
   float threshold = 12;
   
   
   Zone (int x, int y, int w, int h) {  
+    player = minim.loadFile("camPDE.mp3");// 
     this.x = x;
     this.y = y;
     this.width = w;
@@ -110,6 +120,9 @@ class Zone {
     if (average > this.threshold) {
         // If motion, display show block 
         this.show();
+        this.player.rewind(); //rewind before playing to set the track back 
+        this.player.play();  // play track all the way through
+        
     }
   } // end check()
 } // end Zone
